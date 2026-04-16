@@ -62,7 +62,6 @@ It is designed to streamline:
 
 ## 🔁 Workflow
 
-```text
 1. Prepare Windows image (prep script)
 2. Capture image using Clonezilla
 3. Deploy image via GRUB
