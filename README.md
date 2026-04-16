@@ -74,3 +74,7 @@ It is designed to streamline:
 ## 📚 Documentation
 
 Detailed documentation is available in the [docs](./docs) directory.
+
+---
+
+
