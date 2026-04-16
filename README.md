@@ -57,10 +57,6 @@ It is designed to streamline:
 
 ### 🔧 Post-Deployment Automation
 - Automatic hostname assignment (Serial → MAC fallback)
-- User creation (client-ready)
-- Removal of technician accounts
-- System cleanup after cloning
-- One-time execution with self-removal
 
 ---
 
@@ -72,3 +68,9 @@ It is designed to streamline:
 3. Deploy image via GRUB
 4. Run post-clone automation
 5. System ready for delivery
+
+---
+
+## 📚 Documentation
+
+Detailed documentation is available in the [docs](./docs) directory.
