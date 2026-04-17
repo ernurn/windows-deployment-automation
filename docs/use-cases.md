@@ -1,34 +1,55 @@
-\# Use Cases
+# Use Cases
 
+This workflow is designed for real-world IT scenarios where speed, consistency and automation are critical.
 
+---
 
-\## RMA (Repair Process)
+## 🛠 RMA (Repair & Maintenance)
 
+- Fast OS reinstallation for damaged systems
+- Automatic hostname assignment to avoid conflicts
+- Standardized delivery after repair
+- Reduced turnaround time
 
+---
 
-Devices are cloned and automatically renamed to avoid network conflicts and manual setup.
+## 💻 Mass Deployment
 
+- Deploy multiple machines quickly
+- Minimal human interaction required
+- Consistent system configuration across all devices
+- Ideal for batch provisioning
 
+---
 
-\---
+## 🏢 IT Service Environments
 
+- Daily use by technicians managing multiple systems
+- Reduced manual configuration
+- Standardized workflow
+- Improved efficiency and reliability
 
+---
 
-\## Mass Deployment
+## 🧑‍💻 Technician Workflow
 
+- Repeatable and predictable setup process
+- Reduced human error
+- Faster onboarding of new devices
+- Clear logging for troubleshooting
 
+---
 
-Allows multiple machines to be deployed quickly with minimal human interaction.
+## 🏫 Educational / Lab Environments
 
+- Rapid provisioning of lab computers
+- Easy reset to base image
+- Consistent environment for all users
 
+---
 
-\---
+## 🏭 Small / Medium Businesses
 
-
-
-\## IT Service Environments
-
-
-
-Useful for technicians handling multiple systems daily, ensuring consistency and speed.
-
+- Device standardization
+- Faster deployment of new machines
+- Simplified IT operations

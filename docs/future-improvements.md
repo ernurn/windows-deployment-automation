@@ -1,14 +1,19 @@
-\# Future Improvements
+# Future Improvements
 
+Planned enhancements for the project:
 
+## 🚀 Automation
+- Dynamic GRUB menu generation
+- Parameterized deployments (disk selection, modes)
 
-\- Add execution logging
+## 🌐 Infrastructure
+- Network-based deployment (PXE boot)
+- Centralized image repository
 
-\- Integrate with asset management systems
+## 📊 Management
+- Asset management integration
+- Deployment tracking system
 
-\- Allow custom hostname prefixes
-
-\- Add user creation automation
-
-\- Expand deployment workflow
-
+## 🧠 Advanced Features
+- Hardware-based deployment logic
+- Environment-specific configurations
