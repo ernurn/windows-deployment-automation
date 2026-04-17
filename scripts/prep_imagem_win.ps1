@@ -2,10 +2,18 @@
 # Preparação de Imagem Windows
 # Autor: Ernesto Nurnberg
 # Objetivo: Limpeza completa e otimização para clonagem
-# Versão: 4.0
+# Versão: 5.0
 # ========================================
 
-$logPath = "C:\prep_imagem_log.txt"
+# ========================================
+# CONFIGURAÇÃO DE LOGS
+# ========================================
+$logDir = "C:\Logs"
+if (-not (Test-Path $logDir)) {
+    New-Item -Path $logDir -ItemType Directory | Out-Null
+}
+
+$logPath = "$logDir\$(Get-Date -Format 'yyyyMMdd_HHmmss')_prep.log"
 
 function Log {
     param($msg)
@@ -15,7 +23,6 @@ function Log {
 
 function Run-Step {
     param($name, $scriptBlock)
-
     Log "INICIO: $name"
     try {
         & $scriptBlock

@@ -49,6 +49,7 @@ Designed to:
 - Removal of unnecessary applications
 - CompactOS optimization
 - Fast Startup and hibernation disabled
+- Structured logging with timestamps
 
 ---
 
@@ -63,9 +64,32 @@ Designed to:
 ### 🔧 Post-Deployment Automation
 - Automatic hostname assignment (Serial → MAC fallback)
 - Standardized naming format (PC-XXXXX)
+- Fully unattended execution
+- Execution logging for traceability
 
 ---
 
+## 🧾 Logging
+
+A unified logging system is implemented across the workflow.
+
+- Logs are stored in: `C:\Logs`
+- Files are generated using timestamps
+- Separate logs for preparation and post-deployment
+
+Example:
+```text
+C:\Logs
+├── 20260416_103000_prep.log
+├── 20260416_104500_post.log
+```
+
+This enables:
+- Full execution traceability
+- Easier troubleshooting
+- Historical tracking of deployments
+
+---
 ## 🔁 Workflow
 
 ```text
@@ -79,6 +103,17 @@ Prepare → Capture → Deploy → Rename → Ready
 4. Run post-clone automation
 5. System ready for delivery
 ```
+
+---
+
+## 🏭 Production Ready
+
+This workflow is designed for real-world IT environments:
+
+- No manual interaction required
+- Consistent execution across multiple machines
+- Structured logging for observability
+- Scalable deployment approach
 
 ---
 
@@ -137,7 +172,7 @@ Detailed documentation is available in the [docs](./docs) directory.
 - Real-world implementation (not theoretical)
 - Automated and scalable workflow
 - Designed for IT technicians and infrastructure teams
-- Focused on efficiency and reliability
+- Focused on efficiency, reliability and traceability
 
 ---
 
@@ -145,7 +180,6 @@ Detailed documentation is available in the [docs](./docs) directory.
 
 - Dynamic GRUB menu generation
 - Network-based deployment
-- Logging system
 - Asset management integration
 
 ---
