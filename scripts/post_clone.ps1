@@ -2,7 +2,7 @@
 # Script Pós-Clonagem
 # Autor: Ernesto Nurnberg
 # Objetivo: Configuracão automática do sistema 
-# Versão: 2
+# Versão: 2.1
 # ========================================
 
 # ========================================
@@ -34,31 +34,62 @@ function Run-Step {
 
 Log "===== INICIO POST-CLONE ====="
 
+# ========================================
+# GERAR NOME DO EQUIPO
+# ========================================
 Run-Step "Obter identificador" {
 
-    $serial = (Get-CimInstance Win32_BIOS).SerialNumber
+    $id = $null
+
+    # -------- SERIAL --------
+    $serial = (Get-CimInstance Win32_BIOS -ErrorAction SilentlyContinue).SerialNumber
 
     if ($serial -and 
         $serial -notmatch "To be filled" -and 
         $serial -notmatch "System Serial Number") {
 
-        $id = $serial.Substring($serial.Length - 5)
         Log "Serial detectado: $serial"
+
+        if ($serial.Length -ge 5) {
+            $id = $serial.Substring($serial.Length - 5)
+        } else {
+            $id = $serial
+        }
     }
-    else {
-        $mac = (Get-CimInstance Win32_NetworkAdapterConfiguration |
-            Where-Object {$_.MACAddress -ne $null -and $_.IPEnabled})[0].MACAddress
 
-        $macClean = $mac -replace ":", ""
-        $id = $macClean.Substring($macClean.Length - 6)
+    # -------- MAC FALLBACK --------
+    if (-not $id) {
 
-        Log "Fallback MAC: $mac"
+        $adapter = Get-CimInstance Win32_NetworkAdapterConfiguration -ErrorAction SilentlyContinue |
+            Where-Object { $_.MACAddress } |
+            Select-Object -First 1
+
+        if ($adapter -and $adapter.MACAddress) {
+
+            $macClean = $adapter.MACAddress -replace ":", ""
+
+            if ($macClean.Length -ge 6) {
+                $id = $macClean.Substring($macClean.Length - 6)
+                Log "Fallback MAC: $($adapter.MACAddress)"
+            }
+            else {
+                $id = Get-Random -Minimum 10000 -Maximum 99999
+                Log "MAC inválida, usando ID aleatório"
+            }
+        }
+        else {
+            $id = Get-Random -Minimum 10000 -Maximum 99999
+            Log "Sem MAC disponível, usando ID aleatório"
+        }
     }
 
     $script:newName = "PC-$id"
     Log "Nome gerado: $script:newName"
 }
 
+# ========================================
+# RENOMEAR COMPUTADOR
+# ========================================
 Run-Step "Renomear computador" {
 
     $currentName = $env:COMPUTERNAME
