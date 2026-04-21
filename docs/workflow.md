@@ -25,7 +25,7 @@ This document describes the automated workflow for Windows deployment using Clon
 
 4. **Post-Deployment**
    - Run post-clone script
-   - Assign hostname (Serial → MAC fallback)
+   - Generate unique hostname (random ID, hardware-independent)
    - Apply final configuration
    - Generate execution logs
 
@@ -39,6 +39,8 @@ This document describes the automated workflow for Windows deployment using Clon
 
 - Fully automated workflow
 - No manual interaction required
+- Hardware-independent hostname generation
+- Works in offline environments
 - Consistent deployment process
 - Logging at all stages
 - Scalable for multiple machines
@@ -49,5 +51,7 @@ This document describes the automated workflow for Windows deployment using Clon
 
 - Reduce manual configuration
 - Ensure consistency across devices
+- Enable offline deployment capability
+- Standardize large-scale system provisioning
 - Speed up deployment process
 - Improve traceability and reliability

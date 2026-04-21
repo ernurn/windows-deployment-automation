@@ -62,10 +62,11 @@ Designed to:
 ---
 
 ### 🔧 Post-Deployment Automation
-- Automatic hostname assignment (Serial → MAC fallback)
-- Standardized naming format (PC-XXXXX)
+- Automatic hostname assignment using random unique ID
+- Hardware-independent naming (no reliance on Serial or MAC)
+- Standardized naming format (PC-XXXXXXXX)
 - Fully unattended execution
-- Execution logging for traceability
+- Structured logging for traceability
 
 ---
 

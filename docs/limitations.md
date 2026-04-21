@@ -14,9 +14,9 @@ This document outlines current limitations of the workflow.
 
 ## 🔧 Hardware Constraints
 
-- Some devices may not provide valid BIOS serial numbers
-- MAC-based fallback depends on active network interfaces
-- Different hardware vendors may return inconsistent data
+- Hardware-independent hostname generation reduces dependency on device-specific identifiers
+- However, generated hostnames are not human-identifiable (random-based)
+- No built-in mapping between hostname and physical device
 
 ---
 
@@ -45,4 +45,8 @@ This document outlines current limitations of the workflow.
 
 ## 🧠 Notes
 
-These limitations are expected in standalone deployment environments and are part of the planned future improvements.
+These limitations are typical for standalone and offline deployment environments.
+
+Some of them are intentionally accepted trade-offs to ensure reliability, simplicity and independence from external infrastructure.
+
+Future improvements will focus on centralization, scalability and integration with asset management systems.

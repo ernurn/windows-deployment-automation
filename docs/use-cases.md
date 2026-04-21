@@ -2,12 +2,15 @@
 
 This workflow is designed for real-world IT scenarios where speed, consistency and automation are critical.
 
+It is optimized for both connected and offline environments, ensuring reliable deployments across different hardware platforms.
+
 ---
 
 ## 🛠 RMA (Repair & Maintenance)
 
 - Fast OS reinstallation for damaged systems
-- Automatic hostname assignment to avoid conflicts
+- Automatic hostname generation (hardware-independent)
+- No conflicts caused by duplicated MAC or serial numbers
 - Standardized delivery after repair
 - Reduced turnaround time
 
@@ -18,6 +21,7 @@ This workflow is designed for real-world IT scenarios where speed, consistency a
 - Deploy multiple machines quickly
 - Minimal human interaction required
 - Consistent system configuration across all devices
+- Unique hostname generation without network dependency
 - Ideal for batch provisioning
 
 ---
@@ -26,8 +30,9 @@ This workflow is designed for real-world IT scenarios where speed, consistency a
 
 - Daily use by technicians managing multiple systems
 - Reduced manual configuration
-- Standardized workflow
+- Standardized and repeatable workflow
 - Improved efficiency and reliability
+- Centralized troubleshooting using execution logs
 
 ---
 
@@ -37,6 +42,7 @@ This workflow is designed for real-world IT scenarios where speed, consistency a
 - Reduced human error
 - Faster onboarding of new devices
 - Clear logging for troubleshooting
+- No need to manually assign hostnames
 
 ---
 
@@ -45,6 +51,7 @@ This workflow is designed for real-world IT scenarios where speed, consistency a
 - Rapid provisioning of lab computers
 - Easy reset to base image
 - Consistent environment for all users
+- Works without requiring network connectivity
 
 ---
 
@@ -53,3 +60,13 @@ This workflow is designed for real-world IT scenarios where speed, consistency a
 - Device standardization
 - Faster deployment of new machines
 - Simplified IT operations
+- Reliable setup even in limited infrastructure environments
+
+---
+
+## 🌐 Offline Deployment Scenarios
+
+- Fully functional without network connectivity
+- No dependency on external services
+- Hardware-independent hostname generation
+- Ideal for staging, logistics or factory environments
