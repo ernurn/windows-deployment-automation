@@ -2,7 +2,7 @@
 # Script Pós-Clonagem
 # Autor: Ernesto Nurnberg
 # Objetivo: Configuracão automática do sistema 
-# Versão: 2.2
+# Versão: 2.3
 # ========================================
 
 # ========================================
@@ -38,45 +38,22 @@ Log "===== INICIO POST-CLONE ====="
 # ========================================
 # GERAR NOME DO EQUIPO
 # ========================================
-Run-Step "Obter identificador" {
+Run-Step "Gerar nome aleatorio" {
 
-    $serial = (Get-CimInstance Win32_BIOS).SerialNumber
-
-    if ($serial -and 
-        $serial.Trim() -ne "" -and
-        $serial -notmatch "To be filled" -and 
-        $serial -notmatch "System Serial Number") {
-
-        $id = $serial.Substring([Math]::Max(0, $serial.Length - 5))
-        Log "Serial detectado: $serial"
-    }
-    else {
-        Log "Serial inválido, usando MAC como fallback"
-
-        $mac = (Get-CimInstance Win32_NetworkAdapterConfiguration |
-            Where-Object {$_.MACAddress -ne $null})[0].MACAddress
-
-        if (-not $mac) {
-            throw "No se pudo obtener MAC"
-        }
-
-        $macClean = $mac -replace ":", ""
-        $id = $macClean.Substring([Math]::Max(0, $macClean.Length - 6))
-
-        Log "MAC detectada: $mac"
-    }
+    # Genera ID único tipo GUID corto (8 caracteres)
+    $id = ([guid]::NewGuid().ToString().Substring(0,8)).ToUpper()
 
     if (-not $id -or $id.Trim() -eq "") {
-        throw "No se pudo generar ID válido"
+        throw "No se pudo generar ID valido"
     }
 
     $script:newName = "PC-$id"
 
     if ($script:newName -match "-$") {
-        throw "Nombre generado inválido: $script:newName"
+        throw "Nombre generado invalido: $script:newName"
     }
 
-    Log "Nome gerado: $script:newName"
+    Log "Nome gerado (aleatorio): $script:newName"
 }
 
 # ========================================
