@@ -2,7 +2,7 @@
 # Script Pós-Clonagem
 # Autor: Ernesto Nurnberg
 # Objetivo: Configuracão automática do sistema 
-# Versão: 2.1
+# Versão: 2.2
 # ========================================
 
 # ========================================
@@ -29,6 +29,7 @@ function Run-Step {
         Log "OK: $name"
     } catch {
         Log "ERRO: $name -> $_"
+        throw
     }
 }
 
@@ -39,51 +40,42 @@ Log "===== INICIO POST-CLONE ====="
 # ========================================
 Run-Step "Obter identificador" {
 
-    $id = $null
-
-    # -------- SERIAL --------
-    $serial = (Get-CimInstance Win32_BIOS -ErrorAction SilentlyContinue).SerialNumber
+    $serial = (Get-CimInstance Win32_BIOS).SerialNumber
 
     if ($serial -and 
+        $serial.Trim() -ne "" -and
         $serial -notmatch "To be filled" -and 
         $serial -notmatch "System Serial Number") {
 
+        $id = $serial.Substring([Math]::Max(0, $serial.Length - 5))
         Log "Serial detectado: $serial"
+    }
+    else {
+        Log "Serial inválido, usando MAC como fallback"
 
-        if ($serial.Length -ge 5) {
-            $id = $serial.Substring($serial.Length - 5)
-        } else {
-            $id = $serial
+        $mac = (Get-CimInstance Win32_NetworkAdapterConfiguration |
+            Where-Object {$_.MACAddress -ne $null})[0].MACAddress
+
+        if (-not $mac) {
+            throw "No se pudo obtener MAC"
         }
+
+        $macClean = $mac -replace ":", ""
+        $id = $macClean.Substring([Math]::Max(0, $macClean.Length - 6))
+
+        Log "MAC detectada: $mac"
     }
 
-    # -------- MAC FALLBACK --------
-    if (-not $id) {
-
-        $adapter = Get-CimInstance Win32_NetworkAdapterConfiguration -ErrorAction SilentlyContinue |
-            Where-Object { $_.MACAddress } |
-            Select-Object -First 1
-
-        if ($adapter -and $adapter.MACAddress) {
-
-            $macClean = $adapter.MACAddress -replace ":", ""
-
-            if ($macClean.Length -ge 6) {
-                $id = $macClean.Substring($macClean.Length - 6)
-                Log "Fallback MAC: $($adapter.MACAddress)"
-            }
-            else {
-                $id = Get-Random -Minimum 10000 -Maximum 99999
-                Log "MAC inválida, usando ID aleatório"
-            }
-        }
-        else {
-            $id = Get-Random -Minimum 10000 -Maximum 99999
-            Log "Sem MAC disponível, usando ID aleatório"
-        }
+    if (-not $id -or $id.Trim() -eq "") {
+        throw "No se pudo generar ID válido"
     }
 
     $script:newName = "PC-$id"
+
+    if ($script:newName -match "-$") {
+        throw "Nombre generado inválido: $script:newName"
+    }
+
     Log "Nome gerado: $script:newName"
 }
 
